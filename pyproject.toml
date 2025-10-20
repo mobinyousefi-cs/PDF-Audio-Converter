@@ -1,0 +1,51 @@
+# pyproject.toml
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdf-audio-converter"
+version = "0.1.0"
+description = "Convert PDF to audiobook and speech/audio to PDF — Tkinter GUI + CLI"
+readme = "README.md"
+authors = [
+  { name = "Mobin Yousefi", email = "" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+  "pyttsx3>=2.90",
+  "SpeechRecognition>=3.10.0",
+  "PyPDF2>=3.0.1",
+  "reportlab>=4.2.0",
+  # For mic input (optional)
+  "pyaudio; platform_system == 'Windows' or platform_system == 'Linux'",
+]
+
+[project.urls]
+Homepage = "https://github.com/mobinyousefi"
+
+[project.scripts]
+# CLI entry points
+pdf-audio = "pdf_audio_converter.main:app"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["pdf_audio_converter*"]
+
+# ---- Quality tools -------------------------------------------------------
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I", "UP", "B", "W"]
+ignore = ["E501"]
+
+[tool.black]
+line-length = 100
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+pythonpath = ["src"]
